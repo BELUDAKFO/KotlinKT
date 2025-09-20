@@ -1,43 +1,62 @@
 # KT1-2serv
+# Ktor Products API
 
-This project was created using the [Ktor Project Generator](https://start.ktor.io).
 
-Here are some useful links to get you started:
+Запуск через IntelliJ IDEA
 
-- [Ktor Documentation](https://ktor.io/docs/home.html)
-- [Ktor GitHub page](https://github.com/ktorio/ktor)
-- The [Ktor Slack chat](https://app.slack.com/client/T09229ZC6/C0A974TJ9). You'll need
-  to [request an invite](https://surveys.jetbrains.com/s3/kotlin-slack-sign-up) to join.
+1. Откройте проект в IntelliJ IDEA
+2. Найдите файл src/main/kotlin/com/example/Application.kt
+3. Нажмите на зеленую стрелку ▶️ рядом с функцией main()
+4. Выберите "Run 'ApplicationKt'"
 
-## Features
+🧪 Запуск тестов
 
-Here's a list of features included in this project:
+Способ 1: Через Gradle (все тесты)
+# Запуск всех тестов
+./gradlew test
 
-| Name                                                                   | Description                                                                        |
-|------------------------------------------------------------------------|------------------------------------------------------------------------------------|
-| [AsyncAPI](https://start.ktor.io/p/asyncapi)                           | Generates and serves AsyncAPI documentation                                        |
-| [Routing](https://start.ktor.io/p/routing)                             | Provides a structured routing DSL                                                  |
-| [Content Negotiation](https://start.ktor.io/p/content-negotiation)     | Provides automatic content conversion according to Content-Type and Accept headers |
-| [kotlinx.serialization](https://start.ktor.io/p/kotlinx-serialization) | Handles JSON serialization using kotlinx.serialization library                     |
+# Запуск тестов с подробным выводом
+./gradlew test --info
 
-## Building & Running
+# Очистка и запуск тестов
+./gradlew clean test
 
-To build or run the project, use one of the following tasks:
+Способ 2: Через IntelliJ IDEA (отдельные тесты)
 
-| Task                          | Description                                                          |
-|-------------------------------|----------------------------------------------------------------------|
-| `./gradlew test`              | Run the tests                                                        |
-| `./gradlew build`             | Build everything                                                     |
-| `buildFatJar`                 | Build an executable JAR of the server with all dependencies included |
-| `buildImage`                  | Build the docker image to use with the fat JAR                       |
-| `publishImageToLocalRegistry` | Publish the docker image locally                                     |
-| `run`                         | Run the server                                                       |
-| `runDocker`                   | Run using the local docker image                                     |
+1. Откройте файл src/test/kotlin/Test/example/ApplicationTest.kt
+2. Для запуска всех тестов в классе:
+   · Нажмите на зеленую стрелку ▶️ рядом с названием класса ApplicationTest
+   · Выберите "Run 'ApplicationTest'"
+3. Для запуска отдельного теста:
+   · Нажмите на зеленую стрелку ▶️ рядом с аннотацией @Test
+   · Выберите "Run 'testMethodName'"
+4. Для запуска через контекстное меню:
+   · Правой кнопкой на папке test → "Run Tests in 'com.example'"
+   · Правой кнопкой на классе → "Run ApplicationTest"
 
-If the server starts successfully, you'll see the following output:
+📊 Доступные эндпоинты
 
-```
-2024-12-04 14:32:45.584 [main] INFO  Application - Application started in 0.303 seconds.
-2024-12-04 14:32:45.682 [main] INFO  Application - Responding at http://0.0.0.0:8080
-```
+GET /products
 
+Получить все продукты
+curl http://localhost:8080/products
+
+GET /products/{id}
+
+Получить продукт по ID
+curl http://localhost:8080/products/1
+
+POST /products
+
+Создать новый продукт
+curl -X POST http://localhost:8080/products \
+  -H "Content-Type: application/json" \
+  -d '{"productName":"New Product"}'
+
+DELETE /products/{id}
+
+Удалить продукт по ID
+curl -X DELETE http://localhost:8080/products/1
+
+
+Тесты выводят подробную информацию в консоль о статусах запросов и ответах.
